@@ -47,7 +47,7 @@ public class DrawView extends View implements OnTouchListener {
 	    
 	    bitmapCanvas = new Canvas();
 	    bitmapCanvas.setBitmap(bitmap);
-	    bitmapCanvas.drawColor(Color.BLUE);
+	    bitmapCanvas.drawColor(Color.GREEN);
 	    
 	    isInitialized = true;
 	  }
@@ -63,7 +63,7 @@ public class DrawView extends View implements OnTouchListener {
 	  
 	  public boolean onTouch(View view, MotionEvent event)
 	  {
-		  if (event.getAction() == event.ACTION_DOWN){		  
+		  if (event.getAction() == MotionEvent.ACTION_DOWN){		  
 			  if (event.getX() > m_pos_x
 					  && event.getX() < m_pos_x + bitmap.getWidth()
 					  && event.getY() > m_pos_y
@@ -72,12 +72,12 @@ public class DrawView extends View implements OnTouchListener {
 				  m_offset_y = (int) event.getY() - m_pos_y;
 				  m_is_touched = true;
 			  }	   
-		  } else if (event.getAction() == event.ACTION_MOVE){
+		  } else if (event.getAction() == MotionEvent.ACTION_MOVE){
 			  if (m_is_touched){
 				  m_pos_x = (int) event.getX() - m_offset_x;
 				  m_pos_y = (int) event.getY() - m_offset_y;
 			  }			  		  
-		  } else if (event.getAction() == event.ACTION_UP){
+		  } else if (event.getAction() == MotionEvent.ACTION_UP){
 			  m_is_touched = false;
 		  }
 	    
