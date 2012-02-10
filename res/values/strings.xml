@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World, GamemasterToolsActivity!</string>
     <string name="app_name">Gamemaster Tools</string>
+    <string name="charEdit">Character Editor</string>
 
 </resources>
