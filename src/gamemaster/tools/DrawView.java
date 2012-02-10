@@ -1,6 +1,6 @@
 package gamemaster.tools;
 
-import java.util.Vector;
+//import java.util.Vector;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -28,41 +29,51 @@ public class DrawView extends View implements OnTouchListener {
 	  Bitmap bitmap;
 	  Canvas bitmapCanvas;
 	  boolean isInitialized;
+	  
 	  Paint paint = new Paint();
-	  public DrawView(Context context)
-	  {
+	  
+	  private void initMe(){
+		  setFocusable(true);
+		  setFocusableInTouchMode(true);
+		  this.setOnTouchListener(this);
+		  paint.setColor(Color.WHITE);
+		  paint.setAntiAlias(true);
+		  paint.setStyle(Style.FILL_AND_STROKE);
+		  isInitialized = false;	  
+	  }	  
+	  
+	  public DrawView(Context context)	  {
 	    super(context);
-	    setFocusable(true);
-	    setFocusableInTouchMode(true);
-	    this.setOnTouchListener(this);
-	    paint.setColor(Color.WHITE);
-	    paint.setAntiAlias(true);
-	    paint.setStyle(Style.FILL_AND_STROKE);
-	    
-	    isInitialized = false;
+	    initMe();
 	  }
+	  
+	  public DrawView(Context context, AttributeSet attrs) {
+		  super( context, attrs );
+		  initMe();
+	  }
+	  
+	  public DrawView(Context context, AttributeSet attrs, int defStyle) {		   
+		  super( context, attrs, defStyle );
+		  initMe();
+	  }
+	  
 	  private void init()
 	  {
 	    bitmap = Bitmap.createBitmap(m_size_x, m_size_y, Bitmap.Config.RGB_565);	    
-	    
 	    bitmapCanvas = new Canvas();
 	    bitmapCanvas.setBitmap(bitmap);
-	    bitmapCanvas.drawColor(Color.GREEN);
-	    
+	    bitmapCanvas.drawColor(Color.GREEN);	    
 	    isInitialized = true;
 	  }
 	  
 	  @Override
-	  public void onDraw(Canvas canvas)
-	  {
+	  public void onDraw(Canvas canvas){
 	    if (!isInitialized)
-	      init();
-	    
+	      init();	    
 	    canvas.drawBitmap(bitmap, m_pos_x, m_pos_y, paint); 
 	  }	 
 	  
-	  public boolean onTouch(View view, MotionEvent event)
-	  {
+	  public boolean onTouch(View view, MotionEvent event) {
 		  if (event.getAction() == MotionEvent.ACTION_DOWN){		  
 			  if (event.getX() > m_pos_x
 					  && event.getX() < m_pos_x + bitmap.getWidth()
