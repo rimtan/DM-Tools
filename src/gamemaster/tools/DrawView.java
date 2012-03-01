@@ -43,7 +43,7 @@ public class DrawView extends View implements OnTouchListener {
 	  }	  
 	  
 	  public DrawView(Context context)	  {
-	    super(context);
+		super(context);	
 	    initMe();
 	  }
 	  
